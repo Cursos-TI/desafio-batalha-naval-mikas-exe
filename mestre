@@ -1,0 +1,99 @@
+#include <stdio.h>
+
+int main() {
+    char linha[10] = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'};
+    int tabuleiro[10][10] = {0}; // Inicializa o tabuleiro com zeros
+
+    // Adiciona barcos representados por 3
+    tabuleiro[5][3] = 3; // Barco horizontal
+    tabuleiro[5][4] = 3;
+    tabuleiro[5][5] = 3;
+
+    tabuleiro[2][8] = 3; // Barco vertical
+    tabuleiro[3][8] = 3;
+    tabuleiro[4][8] = 3;
+
+    tabuleiro[4][0] =3; //barco horizontal
+    tabuleiro[3][1] =3;
+    tabuleiro[2][2] =3;
+
+    tabuleiro[9][3]= 3;
+    tabuleiro[8][4]= 3;
+    tabuleiro[7][5]= 3;
+    
+    printf("TABULEIRO DE BATALHA NAVAL\n");
+
+    // Imprime o cabeçalho das colunas
+    printf("  ");
+    for (int j = 0; j < 10; j++) {
+        printf("%c ", linha[j]);
+    }
+    printf("\n");
+
+    // Imprime o tabuleiro
+    for (int i = 0; i < 10; i++) {
+        printf("%d ", i); // Imprime o índice da linha
+        for (int j = 0; j < 10; j++) {
+            printf("%d ", tabuleiro[i][j]); // Imprime cada célula do tabuleiro
+        }
+        printf("\n");
+    }
+
+
+
+    int habilidadeCone[5][5] = {
+        {0, 0, 1, 0, 0},
+        {0, 1, 1, 1, 0},
+        {1, 1, 1, 1, 1},
+        {0, 1, 1, 1, 0},
+        {0, 0, 1, 0, 0}
+    };
+
+    int habilidadeCruz[5][5] = {
+        {0, 0, 1, 0, 0},
+        {0, 0, 1, 0, 0},
+        {1, 1, 1, 1, 1},
+        {0, 0, 1, 0, 0},
+        {0, 0, 1, 0, 0}
+    };
+
+    int habilidadeOctaedro[5][5] = {
+        {0, 0, 1, 0, 0},
+        {0, 1, 1, 1, 0},
+        {1, 1, 1, 1, 1},
+        {0, 1, 1, 1, 0},
+        {0, 0, 1, 0, 0}
+    };
+
+    // Definir os pontos de origem para cada habilidade
+    int origemConeX = 3;
+    int origemConeY = 3;
+    int origemCruzX = 6;
+    int origemCruzY = 6;
+    int origemOctaedroX = 8;
+    int origemOctaedroY = 8;
+
+    // Sobrepor as habilidades no tabuleiro
+    for (int i = 0; i < 5; i++) {
+        for (int j = 0; j < 5; j++) {
+            if (habilidadeCone[i][j] == 1) {
+                if (origemConeX + i - 2 >= 0 && origemConeX + i - 2 < 10 && origemConeY + j - 2 >= 0 && origemConeY + j - 2 < 10) {
+                    tabuleiro[origemConeX + i - 2][origemConeY + j - 2] = 5;
+                }
+            }
+            if (habilidadeCruz[i][j] == 1) {
+                if (origemCruzX + i - 2 >= 0 && origemCruzX + i - 2 < 10 && origemCruzY + j - 2 >= 0 && origemCruzY + j - 2 < 10) {
+                    tabuleiro[origemCruzX + i - 2][origemCruzY + j - 2] = 5;
+                }
+            }
+            if (habilidadeOctaedro[i][j] == 1) {
+                if (origemOctaedroX + i - 2 >= 0 && origemOctaedroX + i - 2 < 10 && origemOctaedroY + j - 2 >= 0 && origemOctaedroY + j - 2 < 10) {
+                    tabuleiro[origemOctaedroX + i - 2][origemOctaedroY + j - 2] = 5;
+                }
+            }
+        }
+    }
+
+
+    return 0;
+}
